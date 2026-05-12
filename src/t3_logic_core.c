@@ -39,7 +39,7 @@ static int32_t read_i32(const uint8_t *bytecode, size_t len, size_t *pc, int32_t
 
 int32_t T3_Execute_Scan(const t3_platform_t *platform, t3_scan_buffers_t *buffers) {
     size_t pc = 0u;
-    int32_t acc = 0;
+    int32_t accumulator = 0;
 
     if (buffers == NULL || buffers->bytecode == NULL || (buffers->register_count > 0u && buffers->registers == NULL) ||
         (buffers->input_count > 0u && buffers->inputs == NULL) ||
@@ -62,7 +62,7 @@ int32_t T3_Execute_Scan(const t3_platform_t *platform, t3_scan_buffers_t *buffer
                 t3_log(platform, T3_LOG_ERROR, "input read out of bounds");
                 return T3_ERR_BOUNDS;
             }
-            acc = buffers->inputs[index];
+            accumulator = buffers->inputs[index];
             break;
 
         case T3_OP_LOAD_REG:
@@ -70,7 +70,7 @@ int32_t T3_Execute_Scan(const t3_platform_t *platform, t3_scan_buffers_t *buffer
                 t3_log(platform, T3_LOG_ERROR, "register read out of bounds");
                 return T3_ERR_BOUNDS;
             }
-            acc = buffers->registers[index];
+            accumulator = buffers->registers[index];
             break;
 
         case T3_OP_STORE_REG:
@@ -78,7 +78,7 @@ int32_t T3_Execute_Scan(const t3_platform_t *platform, t3_scan_buffers_t *buffer
                 t3_log(platform, T3_LOG_ERROR, "register write out of bounds");
                 return T3_ERR_BOUNDS;
             }
-            buffers->registers[index] = acc;
+            buffers->registers[index] = accumulator;
             break;
 
         case T3_OP_STORE_OUTPUT:
@@ -86,7 +86,7 @@ int32_t T3_Execute_Scan(const t3_platform_t *platform, t3_scan_buffers_t *buffer
                 t3_log(platform, T3_LOG_ERROR, "output write out of bounds");
                 return T3_ERR_BOUNDS;
             }
-            buffers->outputs[index] = acc;
+            buffers->outputs[index] = accumulator;
             break;
 
         case T3_OP_LOAD_IMM32:
@@ -94,7 +94,7 @@ int32_t T3_Execute_Scan(const t3_platform_t *platform, t3_scan_buffers_t *buffer
                 t3_log(platform, T3_LOG_ERROR, "immediate read out of bounds");
                 return T3_ERR_BOUNDS;
             }
-            acc = imm;
+            accumulator = imm;
             break;
 
         case T3_OP_ADD_IMM32:
@@ -102,7 +102,7 @@ int32_t T3_Execute_Scan(const t3_platform_t *platform, t3_scan_buffers_t *buffer
                 t3_log(platform, T3_LOG_ERROR, "immediate read out of bounds");
                 return T3_ERR_BOUNDS;
             }
-            acc += imm;
+            accumulator += imm;
             break;
 
         default:
