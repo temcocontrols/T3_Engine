@@ -1,7 +1,5 @@
 #include "t3_logic_core.h"
 
-#include <stdio.h>
-
 #define T3_OP_END 0x00u
 #define T3_OP_LOAD_INPUT 0x10u
 #define T3_OP_LOAD_REG 0x11u

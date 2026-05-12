@@ -11,7 +11,9 @@ typedef uint64_t (*t3_millis_fn)(void *user_ctx);
 typedef void (*t3_log_fn)(void *user_ctx, int level, const char *message);
 
 typedef struct t3_platform {
+    /* Optional; may be NULL if timing support is not required by the consumer. */
     t3_millis_fn millis;
+    /* Optional; may be NULL if log forwarding is not required by the consumer. */
     t3_log_fn log;
     void *user_ctx;
 } t3_platform_t;
