@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"name": "T3_Logic_Core",
+			"path": "."
+		},
+		{
+			"name": "T3 firmware (ESP32)",
+			"path": "../T3-programmable-controller-on-ESP32"
+		},
+		{
+			"name": "T3000 (PC)",
+			"path": "../T3000_Building_Automation_System"
+		}
+	],
+	"settings": {}
+}

@@ -1,0 +1,19 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Host compile smoke test
+        run: |
+          gcc -std=c11 -Wall -Wextra -Werror -Iinclude \
+            -D_DEFAULT_SOURCE \
+            tests/smoke_main.c src/t3_clock.c -o smoke
+          ./smoke
