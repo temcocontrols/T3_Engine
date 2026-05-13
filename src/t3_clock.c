@@ -1,3 +1,12 @@
+/*
+ * POSIX host implementation of t3_monotonic_ms() from t3_engine.h.
+ *
+ * Used by this repo's Linux CI and tests/smoke_main.c (link this TU with the test).
+ * Firmware (ESP-IDF, etc.) supplies its own hook when the core is linked there.
+ * T3000's T3EngineDll path does not implement this hook today (shared product
+ * descriptor only); nothing in T3000 replaces this file for host POSIX builds.
+ */
+
 #include "t3_engine.h"
 
 #include <time.h>
