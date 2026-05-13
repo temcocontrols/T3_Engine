@@ -28,6 +28,9 @@
 *.so.*
 *.dylib
 
+# Host smoke test output at repo root (see README; *.exe covers smoke.exe)
+/smoke
+
 # Executables
 *.exe
 *.out
