@@ -28,10 +28,12 @@ The smoke binary links `tests/smoke_main.c` with `src/t3_clock.c`. It calls `t3_
 | Path | Purpose |
 |------|--------|
 | `include/t3_engine.h` | T3Engine host hooks the core calls (time first; I/O later). |
+| `include/temco_product_desc.h` | Shared **product descriptor** struct and helpers (**VID** / **PID** and layout constants); used by ESP32 `pro_info` and PC tools that read the same blob. |
 | `src/t3_clock.c` | Default **host/POSIX** `t3_monotonic_ms()` for CI and smoke tests. |
 | `tests/smoke_main.c` | Minimal program to verify the clock hook. |
 | `.github/workflows/ci.yml` | Linux `gcc` smoke build; job name **`build`** for branch rulesets. |
 | `scripts/build-smoke.ps1` | **Windows:** finds WinGet WinLibs `gcc` if it is not on `PATH`, then builds and runs the smoke test. |
+| `T3_Logic_Core.code-workspace` | **Cursor / VS Code:** open this file for a single-root workspace with include paths for IntelliSense. **Visual Studio** (devenv) does not use `.code-workspace` files; open the **T3Engine** folder (**File → Open → Folder**) or work from the **T3000** solution that submodules this repo. |
 
 Firmware and T3000 stay in their own repos; they will add this tree as a **submodule** when ready.
 

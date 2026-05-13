@@ -43,9 +43,11 @@ Avoid **two diverging “authoritative” BACnet implementations** without an ex
 
 1. **Consumers of the rename** — Update every submodule or copy: `#include "t3_engine.h"`, remove `t3_platform.h` from builds and include paths.
 2. **T3000 `T3EngineDll`** — Ensure `AdditionalIncludeDirectories` points at `..\T3Engine\include` and the solution builds **Win32** DLL next to `T3000.exe`; confirm `LoadLibrary` / `GetProcAddress` smoke in `InitInstance` in **Debug** when `T3Engine.dll` is present.
-3. **ESP-IDF** — When the core is linked as a component, add a **BSP implementation** of `t3_monotonic_ms()` (and future hooks) without including ESP headers from portable translation units where avoidable.
-4. **`.NET Framework` / csproj bumps** — Keep **target framework** and COM interop changes in **separate PRs** from engine integration (team preference).
-5. **Submodule discipline** — Prefer **one canonical T3Engine remote** (e.g. `temcocontrols/T3_Engine`) and pin **SHA** in consuming repos; avoid long-lived drift between a nested `T3Engine/` tree and upstream.
+3. **Shared product descriptor** — `include/temco_product_desc.h` defines the **Temco product identity** layout and helpers; ESP32 `pro_info` and any PC code that parses the same blob should include this header so **VID/PID** placement and offsets stay in sync.
+4. **ESP-IDF** — When more of the core is linked into firmware, keep **portable** translation units free of ESP-IDF headers where possible; supply **host hooks** from `t3_engine.h` (and successors) from the appropriate board/RTOS layer.
+5. **`.NET Framework` / csproj bumps** — Keep **target framework** and COM interop changes in **separate PRs** from engine integration (team preference).
+6. **Submodule discipline** — Prefer **one canonical T3Engine remote** (e.g. `temcocontrols/T3_Engine`) and pin **SHA** in consuming repos; avoid long-lived drift between a nested `T3Engine/` tree and upstream.
+7. **`winPC` product ID (217)** — Downstream **T3000 / ISP** added **`PM_WINPC`** and **`217=winPC`** in product tables. Confirm with **firmware, DB, and tooling** owners that **217** is the agreed ID everywhere (no collision with other registries). This repo does not define numeric product IDs; track cross-team sign-off here so integrators know to verify after each T3Engine/submodule release.
 
 ---
 
