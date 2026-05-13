@@ -1,8 +1,8 @@
 # Build smoke test on Windows: finds WinGet-installed WinLibs gcc if not on PATH.
 $ErrorActionPreference = "Stop"
 $repoRoot = Split-Path -Parent $PSScriptRoot
-if (-not (Test-Path (Join-Path $repoRoot "include\t3_platform.h"))) {
-    throw "Expected include\t3_platform.h under $repoRoot"
+if (-not (Test-Path (Join-Path $repoRoot "include\t3_engine.h"))) {
+    throw "Expected include\t3_engine.h under $repoRoot"
 }
 
 function Find-WinLibsGcc {

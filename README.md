@@ -1,6 +1,6 @@
 # T3Engine
 
-Hardware-agnostic **T3 program execution core**: interpreter (planned) plus **platform hooks** (time first; I/O later). Same codebase is intended to compile for **ESP-IDF** on controllers and as a **Windows DLL** for tools such as T3000.
+Hardware-agnostic **T3 program execution core**: interpreter (planned) plus **host hooks** in `include/t3_engine.h` (time first; I/O later). Same codebase is intended to compile for **ESP-IDF** on controllers and as a **Windows DLL** for tools such as T3000.
 
 ## Quick orientation (for reviewers and integrators)
 
@@ -27,7 +27,7 @@ The smoke binary links `tests/smoke_main.c` with `src/t3_clock.c`. It calls `t3_
 
 | Path | Purpose |
 |------|--------|
-| `include/t3_platform.h` | Platform hooks the core calls (time first; I/O later). |
+| `include/t3_engine.h` | T3Engine host hooks the core calls (time first; I/O later). |
 | `src/t3_clock.c` | Default **host/POSIX** `t3_monotonic_ms()` for CI and smoke tests. |
 | `tests/smoke_main.c` | Minimal program to verify the clock hook. |
 | `.github/workflows/ci.yml` | Linux `gcc` smoke build; job name **`build`** for branch rulesets. |
@@ -53,3 +53,7 @@ gcc -std=c11 -Wall -Wextra -Werror -Iinclude -D_DEFAULT_SOURCE \
 ```
 
 Expected terminal output: `smoke ok`. Remove `./smoke` when done if you like; the binary is gitignored at repo root.
+
+## Roadmap and PR notes
+
+Integration goals, BACnet reuse strategy, and a **suggested GitHub PR description** (including the `t3_engine.h` rename) live in **[`docs/NEXT-STEPS.md`](docs/NEXT-STEPS.md)**.
